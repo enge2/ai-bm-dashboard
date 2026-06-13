@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AI月5万円 戦略BM｜李</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%237b5ea7%22/%3E%3Ctext%20x%3D%2216%22%20y%3D%2224%22%20font-family%3D%22Arial%2Csans-serif%22%20font-size%3D%2222%22%20font-weight%3D%22900%22%20fill%3D%22white%22%20text-anchor%3D%22middle%22%3EL%3C/text%3E%3C/svg%3E"/>
+<style>
+:root{--bg:#07090f;--bg2:#0d1120;--bg3:#131929;--bg4:#1a2235;--border:#1e2d4a;--border2:#253350;--purple:#7b5ea7;--blue:#3b82f6;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;--cyan:#06b6d4;--text:#cbd5e1;--text2:#64748b;--text3:#94a3b8;--r:8px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:"Noto Sans JP","Segoe UI",system-ui,sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden;font-size:14px;}
+/* HEADER */
+header{height:50px;background:var(--bg2);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:10px;flex-shrink:0;}
+.lmark{width:32px;height:32px;background:linear-gradient(135deg,#7b5ea7,#06b6d4);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.1rem;color:#fff;flex-shrink:0;box-shadow:0 2px 8px #7b5ea750;letter-spacing:-.02em;}
+.header-title{font-weight:900;font-size:.88rem;background:linear-gradient(90deg,#a78bfa,#38bdf8,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;}
+.header-sep{width:1px;height:20px;background:var(--border);flex-shrink:0;}
+.header-sub{font-size:.65rem;color:var(--text2);white-space:nowrap;}
+.h-chip{padding:3px 9px;border-radius:10px;font-size:.64rem;font-weight:700;border:1px solid;margin-left:4px;white-space:nowrap;}
+.hc-p{background:#7b5ea715;color:#c4b5fd;border-color:#7b5ea740;}
+.hc-g{background:#10b98115;color:#34d399;border-color:#10b98140;}
+.hc-y{background:#f59e0b15;color:#fbbf24;border-color:#f59e0b40;}
+/* LAYOUT */
+.app{display:flex;flex:1;overflow:hidden;}
+/* SIDEBAR */
+.sidebar{width:236px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;}
+.sidebar-scroll{flex:1;overflow-y:auto;padding:6px 5px;}
+.sidebar-scroll::-webkit-scrollbar{width:4px;}
+.sidebar-scroll::-webkit-scrollbar-track{background:transparent;}
+.sidebar-scroll::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.sg-label{font-size:.57rem;text-transform:uppercase;letter-spacing:.09em;color:var(--text2);padding:8px 7px 3px;font-weight:700;}
+.bm-item{display:flex;align-items:center;gap:7px;padding:7px 7px;border-radius:7px;cursor:pointer;transition:all .15s;margin-bottom:2px;border:1px solid transparent;}
+.bm-item:hover{background:var(--bg3);}
+.bm-item.active{background:#7b5ea718;border-color:#7b5ea745;}
+.bm-badge{width:25px;height:25px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.7rem;flex-shrink:0;}
+.bm-info{flex:1;min-width:0;}
+.bm-name{font-size:.7rem;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.3;margin-bottom:2px;}
+.bm-row2{display:flex;align-items:center;gap:4px;}
+.bm-stag{font-size:.54rem;padding:1px 5px;border-radius:4px;font-weight:700;flex-shrink:0;}
+.mini-bar{flex:1;height:2px;background:var(--bg4);border-radius:1px;overflow:hidden;}
+.mini-fill{height:100%;background:linear-gradient(90deg,#7b5ea7,#06b6d4);transition:width .3s;}
+.sidebar-foot{padding:9px 10px;border-top:1px solid var(--border);font-size:.65rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;}
+.sf-item{text-align:center;}
+.sf-val{font-weight:800;font-size:.82rem;color:#a78bfa;}
+.sf-lbl{color:var(--text2);font-size:.58rem;margin-top:1px;}
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+.bm-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;gap:10px;color:var(--text2);}
+.empty-lmark{width:64px;height:64px;background:linear-gradient(135deg,#7b5ea728,#06b6d428);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:900;color:#7b5ea7;border:1px solid #7b5ea730;}
+.bm-view{display:none;flex-direction:column;height:100%;}
+/* BM HEADER */
+.bm-hd{padding:12px 18px;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--bg2);}
+.bm-hd-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;}
+.bm-num-xl{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.95rem;flex-shrink:0;}
+.bm-title-blk{flex:1;}
+.bm-main-ttl{font-size:1rem;font-weight:900;margin-bottom:5px;line-height:1.3;}
+.bm-tags{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.tag{padding:2px 7px;border-radius:5px;font-size:.63rem;font-weight:700;}
+.t-ns{background:#1e293b;color:#64748b;border:1px solid #334155;}
+.t-ip{background:#1e3a5f;color:#60a5fa;border:1px solid #2563eb40;}
+.t-dn{background:#14532d;color:#4ade80;border:1px solid #16a34a40;}
+.u-now{background:#ef444415;color:#f87171;border:1px solid #ef444430;}
+.u-mid{background:#f59e0b15;color:#fbbf24;border:1px solid #f59e0b30;}
+.u-build{background:#3b82f615;color:#60a5fa;border:1px solid #3b82f630;}
+.t-type{background:#1e293b;color:#94a3b8;border:1px solid #334155;}
+.stsel{padding:2px 8px;border-radius:5px;border:1px solid var(--border2);background:var(--bg4);color:var(--text);font-size:.63rem;cursor:pointer;outline:none;}
+.dl-txt{font-size:.64rem;font-weight:700;}
+.bm-prog-row{display:flex;align-items:center;gap:8px;font-size:.65rem;color:var(--text2);}
+.bm-prog-bg{flex:1;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+.bm-prog-fill{height:100%;background:linear-gradient(90deg,#7b5ea7,#06b6d4);transition:width .4s;}
+/* INNER TABS */
+.inner-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0;background:var(--bg2);}
+.itab{padding:9px 14px;font-size:.7rem;font-weight:600;color:var(--text2);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;}
+.itab:hover{color:var(--text);}
+.itab.active{color:#a78bfa;border-bottom-color:#7b5ea7;}
+/* PANELS */
+.panels{flex:1;overflow-y:auto;}
+.panels::-webkit-scrollbar{width:4px;}
+.panels::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.panel{display:none;padding:16px 18px;}
+.panel.active{display:block;}
+/* STRATEGY */
+.rat-box{background:linear-gradient(135deg,#18103a 0%,#0d1829 100%);border:1px solid #3b2f6a;border-left:3px solid #7b5ea7;border-radius:var(--r);padding:11px 13px;margin-bottom:14px;}
+.box-lbl{font-size:.58rem;text-transform:uppercase;letter-spacing:.08em;color:#a78bfa;margin-bottom:4px;font-weight:700;}
+.box-txt{font-size:.76rem;line-height:1.8;color:var(--text3);}
+.ue-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.ue-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:9px 11px;}
+.ue-lbl{font-size:.57rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text2);margin-bottom:3px;}
+.ue-val{font-size:.84rem;font-weight:700;}
+.ue-g{color:var(--green)}.ue-b{color:var(--blue)}.ue-y{color:var(--yellow)}.ue-p{color:#a78bfa}
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:7px;}
+.tool-card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:9px 11px;display:flex;gap:8px;align-items:flex-start;}
+.tool-ico{width:26px;height:26px;border-radius:6px;background:var(--bg4);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;}
+.tool-name{font-size:.7rem;font-weight:700;margin-bottom:2px;}
+.tool-use{font-size:.62rem;color:var(--text2);line-height:1.45;}
+/* MILESTONES */
+.ms-list{list-style:none;}
+.ms-item{display:flex;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);cursor:pointer;}
+.ms-item:hover{background:#ffffff03;}
+.ms-item:last-child{border-bottom:none;}
+.ms-spine{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.ms-dot{width:12px;height:12px;border-radius:50%;border:2px solid var(--border2);margin-top:2px;transition:all .2s;}
+.ms-dot.dn{background:var(--green);border-color:var(--green);}
+.ms-dot.ac{background:#7b5ea7;border-color:#7b5ea7;}
+.ms-line{width:2px;flex:1;background:var(--border);margin-top:3px;min-height:10px;}
+.ms-content{flex:1;}
+.ms-day{font-size:.6rem;font-weight:700;color:#a78bfa;margin-bottom:1px;}
+.ms-txt{font-size:.72rem;line-height:1.6;color:var(--text3);}
+.ms-item.ck .ms-txt{text-decoration:line-through;color:var(--text2);}
+/* TODOS */
+.td-count{font-size:.62rem;color:var(--text2);padding:0 4px 7px;}
+.td-list{list-style:none;}
+.td-item{display:flex;align-items:flex-start;gap:7px;padding:7px 5px;border-bottom:1px solid var(--border);cursor:pointer;border-radius:5px;transition:background .1s;}
+.td-item:hover{background:#ffffff04;}
+.td-item:last-child{border-bottom:none;}
+.td-cb{width:14px;height:14px;border:1.5px solid var(--border2);border-radius:3px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.td-item.ck .td-cb{background:var(--green);border-color:var(--green);}
+.td-item.ck .td-cb::after{content:"✓";font-size:.55rem;color:#07090f;font-weight:900;}
+.td-item.ck .td-txt{text-decoration:line-through;color:var(--text2);}
+.td-txt{font-size:.73rem;line-height:1.65;}
+/* COLORS */
+.n1{background:#7b5ea715;color:#a78bfa;border:1px solid #7b5ea740;}
+.n2{background:#0891b215;color:#38bdf8;border:1px solid #0891b240;}
+.n3{background:#db277015;color:#f472b6;border:1px solid #db277040;}
+.n4{background:#d9770615;color:#fb923c;border:1px solid #d9770640;}
+.n5{background:#15803d15;color:#4ade80;border:1px solid #15803d40;}
+.n6{background:#92400e15;color:#fbbf24;border:1px solid #92400e40;}
+.n7{background:#9f123915;color:#fb7185;border:1px solid #9f123940;}
+.n8{background:#5b21b615;color:#c084fc;border:1px solid #5b21b640;}
+.n9{background:#0f766e15;color:#2dd4bf;border:1px solid #0f766e40;}
+.n10{background:#1e40af15;color:#818cf8;border:1px solid #1e40af40;}
+@media(max-width:680px){
+  .sidebar{width:52px;}
+  .bm-name,.bm-row2,.sg-label,.sidebar-foot,.header-sub,.header-sep,.hc-y{display:none;}
+  .bm-item{justify-content:center;padding:6px;}
+  .panel{padding:10px 12px;}
+  .tools-grid{grid-template-columns:1fr 1fr;}
+  .ue-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="lmark">L</div>
+  <div class="header-title">AI Value Arbitrage — 月5万円 戦略BM</div>
+  <div class="header-sep"></div>
+  <div class="header-sub">担当: 李 ／ AT Kearney水準 ／ 2026-07-14</div>
+  <div class="h-chip hc-p" id="h-pct">0% 完了</div>
+  <div class="h-chip hc-g" id="h-act">0件 進行中</div>
+  <div class="h-chip hc-y" id="h-td">0/0 ToDo</div>
+</header>
+<div class="app">
+  <aside class="sidebar">
+    <div class="sidebar-scroll" id="sb-list"></div>
+    <div class="sidebar-foot">
+      <div class="sf-item"><div class="sf-val" id="sf-dn">0</div><div class="sf-lbl">完了TD</div></div>
+      <div class="sf-item"><div class="sf-val" id="sf-tot">0</div><div class="sf-lbl">総TD</div></div>
+      <div class="sf-item"><div class="sf-val" id="sf-pct">0%</div><div class="sf-lbl">進捗</div></div>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="bm-empty" id="empty">
+      <div class="empty-lmark">L</div>
+      <div style="font-size:.85rem;font-weight:700;color:var(--text);">ビジネスモデルを選択</div>
+      <div style="font-size:.7rem;">左サイドバーから BM① 〜 BM⑩ を選んでください</div>
+    </div>
+    <div class="bm-view" id="bm-view">
+      <div class="bm-hd" id="bm-hd"></div>
+      <div class="inner-tabs" id="inner-tabs">
+        <button class="itab active" data-tab="strategy">📊 戦略概要</button>
+        <button class="itab" data-tab="tools">🛠 ツール</button>
+        <button class="itab" data-tab="milestones">🎯 マイルストーン</button>
+        <button class="itab" data-tab="todos">✅ ToDo</button>
+      </div>
+      <div class="panels">
+        <div class="panel active" id="panel-strategy"></div>
+        <div class="panel" id="panel-tools"></div>
+        <div class="panel" id="panel-milestones"></div>
+        <div class="panel" id="panel-todos"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+const BMS=[
+{id:1,title:"補助金申請書類 AI代行",type:"補助金支援",urgency:"now",
+ rationale:"中小企業庁の補助金総額は年間1.2兆円超。採択率30〜40%のボトルネックは「書類が書けない」こと。Claudeで採択水準の書類を半日で生成。粗利99.4%・工数1/10で最高の価格競争力を実現できる。",
+ ue:[{l:"単価",v:"50,000〜150,000円/件",c:"ue-g"},{l:"粗利率",v:"99.4%",c:"ue-p"},{l:"AI Leverage",v:"工数 1/10",c:"ue-b"},{l:"TTR",v:"7〜14日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"採択書類ドラフト生成・構成最適化"},{i:"📋",n:"Google Forms",u:"ヒアリング・録音受付フォーム"},{i:"📝",n:"Notion",u:"案件管理・書類テンプレ"},{i:"🧾",n:"freee / 弥生",u:"請求書・契約書発行"},{i:"🔍",n:"J-Net21",u:"補助金情報のソース収集"},{i:"💬",n:"Zoom",u:"クライアントヒアリング"}],
+ ms:["Day1: 主要3補助金の採択書類をClaudeで分析・パターン抽出","Day3: 自社用サンプル申請書を1本フル作成（品質証明）","Day5: 中小企業診断士・行政書士にB2B提案DM20件","Day7: 中小企業経営者にDM50件","Day10: 着手金25,000円受領・ドラフト開始","Day14: 納品・残金受領→50,000円確定"],
+ todos:["主要3補助金（ものづくり・IT導入・持続化）の採択書類パターンをClaudeで分析","採択されやすい事業計画書の型をプロンプトに落とし込む","自分のビジネスでサンプル申請書を1本フル作成","中小企業診断士・行政書士にホワイトラベル提案DM20件","補助金申請に悩む中小企業経営者にDM50件","受注後: ヒアリング1h → Claudeドラフト3h → 確認修正1h → 納品","着手金50%先払いを原則とする","採択率トラッキングを開始し実績を蓄積する"],dl:"2026-07-14"},
+{id:2,title:"経営者・役員向け SNSゴーストライター",type:"コンテンツ代行",urgency:"now",
+ rationale:"LinkedInの個人アカウントは企業アカウントの10倍以上のエンゲージメント。Claudeは10分のヒアリングで経営者の語り口を完全模倣。蓄積するほどスイッチングコストが上がる複利型Moat。",
+ ue:[{l:"月額",v:"40,000〜60,000円/人",c:"ue-g"},{l:"粗利率",v:"99%",c:"ue-p"},{l:"AI Leverage",v:"工数 1/8",c:"ue-b"},{l:"TTR",v:"7〜10日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"語り口模倣・投稿文生成"},{i:"📊",n:"X / LinkedIn",u:"投稿・エンゲージメント分析"},{i:"📦",n:"Buffer / Later",u:"投稿予約・一括管理"},{i:"📝",n:"Notion",u:"語り口ライブラリ・クライアント管理"},{i:"🎙",n:"Otter.ai",u:"音声ヒアリングの文字起こし"},{i:"📈",n:"Shield Analytics",u:"LinkedIn投稿の詳細分析"}],
+ ms:["Day1-3: 自分のXポストをClaudeで改善したサンプル5本作成","Day4: 「無料で今すぐ改善版を作ります」DM50件","Day7: デモで語り口模倣した投稿3本を即時作成","Day10: 初成約・前払い40,000円受領","Day14: 2社目→月80,000円確定"],
+ todos:["経営者のVoice（語り口・口癖・業界観）抽出ヒアリングシートを作成","語り口模倣プロンプトをClaudeで最適化","売上1〜30億規模の中小企業経営者のXアカウントリスト100件作成","「無料で今すぐ改善版を作ります」DM50件","月12本ポスト（週3本）＋月1本ニュースレターを納品物として設計","投稿後エンゲージメントをKPIとして毎週共有","語り口ライブラリをNotion DBで管理","3ヶ月後エンゲージメント改善データで継続率を高める"],dl:"2026-07-14"},
+{id:3,title:"競合インテリジェンス 週次レポート",type:"リサーチ代行",urgency:"now",
+ rationale:"EC・SaaS・小売業者の競合追跡は「やりたいが工数がない」業務の筆頭。Claudeで週次レポートを自動化し従来20時間/月→3時間/月に圧縮。提供物は「情報」ではなく「意思決定インサイト」で差別化。",
+ ue:[{l:"月額",v:"30,000〜50,000円/社",c:"ue-g"},{l:"粗利率",v:"98%",c:"ue-p"},{l:"AI Leverage",v:"工数 1/7",c:"ue-b"},{l:"TTR",v:"10〜14日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"競合分析・インサイト生成"},{i:"🔍",n:"Perplexity API",u:"リアルタイム情報収集"},{i:"📊",n:"Google Sheets",u:"レポートテンプレ・整形"},{i:"📝",n:"Notion",u:"配信管理・クライアントDB"},{i:"🌐",n:"SimilarWeb",u:"トラフィック・競合データ"},{i:"📧",n:"Gmail",u:"週次レポート自動配信"}],
+ ms:["Day1-2: 自社用サンプルレポートを1社分Claudeで作成","Day3: ECサイト経営者・SaaS PdMにDM50件","Day7: 先方の競合を実際に調べたデモレポートを無料送付","Day10: 初成約→月30,000円スタート","Day14: 2社目→月60,000円達成"],
+ todos:["競合インテリジェンスレポートテンプレをClaudeで設計（5セクション構成）","実在するEC事業者1社の競合5社対象にサンプルレポートを作成","Claude API + Perplexity APIを組み合わせた自動収集フローを構築","ECサイト運営者・D2Cブランド・SaaS PdMのXアカウントリスト100件作成","「先方の競合を今すぐ無料でサンプルを送ります」DM50件","週次自動レポート生成の半自動フローをGoogleDocsで整備","成約後: 競合リスト（5〜10社）と追跡ポイントをヒアリングで確定","月次レビューMTG（30分）でインサイト解説→継続率向上"],dl:"2026-07-14"},
+{id:4,title:"Whisper+Claude 議事録→アクション管理 3h納品",type:"自動化サービス",urgency:"now",
+ rationale:"日本企業の会議時間は1人年間約800時間（野村総研）。「録音を送るだけ→当日3時間以内でアクション付き議事録が届く」は即決される。note実績: 9ヶ月で月8万円・15社達成。",
+ ue:[{l:"単価",v:"5,000〜10,000円/回",c:"ue-g"},{l:"粗利率",v:"99%",c:"ue-p"},{l:"AI Leverage",v:"工数 1/10",c:"ue-b"},{l:"TTR",v:"3〜7日（最速）",c:"ue-y"}],
+ tools:[{i:"🎙",n:"AssemblyAI",u:"日本語高精度音声文字起こし"},{i:"🤖",n:"Claude API",u:"議事録整形・アクション抽出"},{i:"📋",n:"Google Forms",u:"録音ファイル受付フォーム"},{i:"📄",n:"Notion / PDF",u:"議事録納品・共有"},{i:"🎬",n:"Zoom / Meet",u:"録音データ取得元"},{i:"⚡",n:"Make / Zapier",u:"受付〜処理〜納品の自動化"}],
+ ms:["Day1: Whisper環境構築＋Claude議事録整形プロンプト最適化","Day2: 自分のZoom会議でサンプル議事録を1本作成（Before/After）","Day3: Xで「議事録代行 当日3時間以内 5,000円」投稿","Day5: フリーランス・コンサル・経営者コミュニティにDM50件","Day7: 初受注→即日処理→納品","Week3: 月10件ペース確立→50,000円達成"],
+ todos:["AssemblyAIまたはOpenAI Whisper APIの環境を構築","Claude用議事録整形プロンプトを最適化（決定事項/アクション/担当者/期日を必ず抽出）","自分の打ち合わせ録音でサンプルを1本作成しBefore/After画像を作る","Xで「議事録自動化 当日3時間以内納品 1件5,000円 先着5名」を投稿","受注フロー整備: Google Form→確認メール→処理→PDF/Notion納品","月額定期プランを設計（週1定例=15,000円/月、週2=25,000円/月）","受注5件達成後に処理の半自動化フローをMake/Zapierで整備","「アクション達成率が上がった」実績を積んで単価引き上げ"],dl:"2026-07-14"},
+{id:5,title:"中小企業向け AI導入 PoCパッケージ（1週間）",type:"AI導入コンサル",urgency:"mid",
+ rationale:"経産省2025年DX調査: 中小企業のAI導入率12%（大企業60%）。「何から始めればいいか」が最多の回答。1週間PoCは数百万のDXプロジェクトへの入口として意思決定が圧倒的に速い。",
+ ue:[{l:"単価",v:"50,000〜100,000円/件",c:"ue-g"},{l:"粗利率",v:"97〜99%",c:"ue-p"},{l:"LTV",v:"顧問化で月3〜5万",c:"ue-b"},{l:"TTR",v:"10〜17日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"PoC Bot本体の構築"},{i:"💬",n:"LINE Messaging API",u:"顧客向けチャットBot接続"},{i:"⚡",n:"Slack Bolt SDK",u:"社内連携Bot構築"},{i:"📝",n:"Notion",u:"PoC進捗・仕様書共有"},{i:"🖥",n:"Google Slides",u:"PoC成果報告デッキ作成"},{i:"🔄",n:"Make / n8n",u:"PoC自動化フロー構築"}],
+ ms:["Day1-2: 3種類のPoCテンプレを事前構築（即デモできる状態に）","Day3: LinkedInとXで「AI導入PoC 1週間・50,000円」投稿","Day5: 中小企業経営者・DX担当者にDM50件","Day7: 無料30分ヒアリング実施","Day10: 成約→PoC開始（着手金50%）","Day17: PoC完了・残金受領→50,000円確定"],
+ todos:["PoCテンプレA（問い合わせBot）をClaude API + LINE Webhookで事前構築","PoCテンプレB（社内FAQ）をClaude API + 文書読み込みで事前構築","PoCテンプレC（議事録要約）はBM④と共通で流用","「AI導入に失敗する企業の3パターン」系の教育ツイートをXで発信","LinkedInで中小企業経営者・DX担当者・情シス部長にDM50件","無料ヒアリングシートをNotionで作成","PoC中は毎日5分のSlack進捗報告（信頼感構築）","PoC完了後48時間以内に月額顧問の提案書を送付"],dl:"2026-07-14"},
+{id:6,title:"士業・コンサル向け AI業務バックエンド",type:"B2B ホワイトラベル",urgency:"mid",
+ rationale:"税理士・診断士・行政書士は「AIスキルはないが顧客は持っている」構造。直接エンドクライアントを営業するより成約スピードが10倍速い。士業自身のサービス品質が上がることに即決できる。",
+ ue:[{l:"月額",v:"30,000〜100,000円/事務所",c:"ue-g"},{l:"粗利率",v:"98%",c:"ue-p"},{l:"スケール性",v:"事務所×顧客数",c:"ue-b"},{l:"TTR",v:"7〜10日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"業務処理バックエンド（書類生成・分析）"},{i:"📝",n:"Notion API",u:"文書管理・テンプレート化"},{i:"📊",n:"Google Workspace",u:"クライアントとの連携・共有"},{i:"💬",n:"LINE WORKS",u:"士業事務所とのチャット連携"},{i:"🧾",n:"freee / 弥生 API",u:"会計データ連携（税理士向け）"},{i:"🔒",n:"GCP Secret Manager",u:"APIキー・機密情報の安全管理"}],
+ ms:["Day1: 士業別サービスデモを各1本作成（税理士・診断士）","Day3: 税理士・診断士・行政書士コミュニティにアプローチ","Day5: 「AIで付加価値を上げませんか？デモ30分」DM30件","Day7: 初成約（30,000〜50,000円/月）","Day14: 2事務所目→月60,000〜100,000円達成"],
+ todos:["税理士向け「月次コメンタリー自動生成」サンプルを試算表データで作成","診断士向け「経営診断書AIドラフト」サンプルを作成","士業向け提案資料をNotionで作成","税理士・診断士のXアカウント・士業コミュニティをリスト化","「月次の試算表説明が大変」という士業にDM30件","成約後: 月次処理バッチ化（プロンプト固定化しデータ入れ替えだけで完結）","品質管理: 士業が最終チェックする二重確認プロセスを設計","3事務所達成後にSaaSへの転換を検討"],dl:"2026-07-14"},
+{id:7,title:"スタートアップ向け 事業計画書・ピッチデッキ代行",type:"ドキュメント代行",urgency:"mid",
+ rationale:"VCへの資金調達・社内新規事業承認に必要な事業計画書は創業者が「最も書きたくない」ドキュメント。人間がゼロから書くと40〜80時間→Claudeなら構造化ヒアリング2h+生成3h+修正2h=7時間で完成。",
+ ue:[{l:"単価",v:"80,000〜150,000円/件",c:"ue-g"},{l:"粗利率",v:"99%",c:"ue-p"},{l:"AI Leverage",v:"工数 1/8",c:"ue-b"},{l:"TTR",v:"14〜21日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"事業計画書ドラフト・ロジック構築"},{i:"🔍",n:"Perplexity API",u:"市場規模・競合調査"},{i:"🎨",n:"Canva / Slides",u:"ピッチデッキのビジュアル化"},{i:"📝",n:"Notion",u:"版管理・ヒアリング記録"},{i:"📊",n:"Python / Sheets",u:"財務シミュレーション"},{i:"🎙",n:"Otter.ai",u:"壁打ちヒアリングの文字起こし"}],
+ ms:["Day1: 架空スタートアップで事業計画書サンプルを1本フル作成","Day3: スタートアップ創業者・新規事業担当者へDM50件","Day7: 初問い合わせ→「事業壁打ち30分無料」ヒアリング設定","Day14: 成約・着手金50,000円受領","Day21: 納品・残金受領→80,000〜100,000円達成"],
+ todos:["事業計画書の「採択・承認されやすい構成」をClaudeで分析し型化","架空のD2Cスタートアップで事業計画書を1本フル作成","市場規模推計・競合分析・財務シミュレーションの各プロンプトを整備","スタートアップ創業者・新規事業部長のXアカウントリストを100件作成","「事業計画書の壁打ち30分無料」という入口でDM50件","壁打ち後にスコープと金額を提示（着手金50%前払いを原則）","VCフィードバックを反映する修正ラウンドを1回含む設計にする","完成後にLinkedInで支援事例を（許可取得後）投稿"],dl:"2026-07-14"},
+{id:8,title:"法人向け 社内ナレッジベース AI化",type:"Bot構築",urgency:"build",
+ rationale:"McKinsey 2024: 社内問い合わせの40%は繰り返し同じ質問。Claudeの200Kトークンで社内文書全体を読み込み、Slack/LINE WORKSで即時自動回答するBotを構築。半永久稼働インフラとして買われる。",
+ ue:[{l:"構築費",v:"80,000〜200,000円/社",c:"ue-g"},{l:"月保守",v:"10,000〜30,000円",c:"ue-b"},{l:"LTV",v:"2〜3年継続",c:"ue-p"},{l:"TTR",v:"17〜24日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"社内FAQ自動応答・文書理解"},{i:"⚡",n:"Slack Bolt SDK",u:"Slack内Botインターフェース"},{i:"📄",n:"PDF/Word ローダー",u:"社内文書の読み込み・インデックス化"},{i:"📝",n:"Notion API",u:"FAQデータベース管理"},{i:"☁",n:"GCP / AWS",u:"本番環境・APIキー管理"},{i:"💬",n:"LINE WORKS API",u:"代替Botチャンネル"}],
+ ms:["Day1-3: 架空FAQ20問でデモBotを構築（Slack上で動作）","Day4: LinkedInで「社内FAQがAIに自動回答されるBot」投稿","Day5: 50〜300名規模企業の経営者・人事部長にDM50件","Day10: デモ見せて初成約","Day17: 構築完了・80,000円受領"],
+ todos:["Claude API + Slack Bolt SDKを連携したデモBotをゼロから構築","社内FAQ 20問でデモ動画（1分）を撮影","「社内の同じ質問に何度も答えていませんか？」系ツイートをXに投稿","50〜300名規模企業の経営者・人事・総務部長にDM50件","成約後のヒアリングシート作成（FAQ文書収集・優先度・Slack/LINE WORKS判定）","社内文書（PDF/Word/Notion）をClaudeに読み込ませるフローを自動化","月次で「回答精度・利用率・新FAQ追加」レポートを提供して保守継続率を高める","3社構築後にテンプレ化し構築コストを1/3に圧縮"],dl:"2026-07-14"},
+{id:9,title:"経営数値のAIナラティブ化（CFO・経営企画向け）",type:"経営分析代行",urgency:"mid",
+ rationale:"月次の試算表・KPIダッシュボードを見て「何が起きているか・何をすべきか」のナラティブを書けない経営者・CFOは多い。Claudeは財務データを受け取り、因果関係と優先アクションを経営者言語で出力できる。",
+ ue:[{l:"月額",v:"50,000〜100,000円/社",c:"ue-g"},{l:"粗利率",v:"99%",c:"ue-p"},{l:"AI Leverage",v:"工数 1/6",c:"ue-b"},{l:"TTR",v:"14〜21日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"財務データ→経営者言語ナラティブ変換"},{i:"🐍",n:"Python / pandas",u:"CSV・Excelデータの前処理"},{i:"📊",n:"Google Sheets",u:"KPIデータ受け取り・整形"},{i:"📝",n:"Notion",u:"月次レポート配信・版管理"},{i:"📈",n:"Looker Studio",u:"可視化ダッシュボード（オプション）"},{i:"🔒",n:"暗号化メール",u:"機密財務データの安全な受け渡し"}],
+ ms:["Day1: 架空中小企業の試算表でサンプルレポートを作成","Day3: CFO・財務部長・経営企画部長にDM50件","Day7: 「来月の試算表で無料お試しレポートを作ります」デモオファー","Day14: 初成約・50,000円/月確定"],
+ todos:["「経営数値ナラティブプロンプト」をClaudeで最適化（CSV入力→経営者向けレポート出力）","架空の製造業・小売業の試算表でサンプルレポートを2業種分作成","CFO・財務部長・経営企画のX/LinkedInをリスト化","「月次の数字を読んで次の打ち手を出せていますか？」DM50件","「来月の試算表で無料デモレポートを作ります」で入口を低くする","成約後: 毎月KPIデータ（CSV）受け取り→Claude処理→PDF/Notion納品（所要2時間）","四半期ごとに「経営数値の3ヶ月トレンド分析」を追加提供し価値を高める","成果（意思決定の質改善）を定性的に記録し継続率を維持"],dl:"2026-07-14"},
+{id:10,title:"海外展開AI市場調査パッケージ",type:"海外リサーチ",urgency:"build",
+ rationale:"円安定着の2026年、海外進出・越境ECへの関心が急増。「現地市場調査・英語リサーチ」がボトルネック。Claudeは英語・中国語・韓国語の一次情報を収集・分析・翻訳でき、従来200万円のコンサル案件を10万円以下で提供できる。",
+ ue:[{l:"単価",v:"80,000〜150,000円/件",c:"ue-g"},{l:"月次版",v:"50,000〜80,000円/月",c:"ue-b"},{l:"粗利率",v:"99%",c:"ue-p"},{l:"TTR",v:"21〜30日",c:"ue-y"}],
+ tools:[{i:"🤖",n:"Claude API",u:"多言語リサーチ・分析・レポート生成"},{i:"🔍",n:"Perplexity API",u:"海外一次情報・英語ソース収集"},{i:"🌏",n:"DeepL API",u:"翻訳補助・ニュアンス確認"},{i:"📝",n:"Notion",u:"レポート整形・クライアント共有"},{i:"📊",n:"Google Sheets",u:"市場データ整理・グラフ化"},{i:"🌐",n:"JETRO / Statista",u:"信頼性の高い統計データソース"}],
+ ms:["Day1-2: 越境EC（米国またはASEAN）サンプル市場調査レポートをClaudeで作成","Day3: 越境EC・海外展開検討中の中小企業経営者にDM50件","Day7: 初問い合わせ→ヒアリング（30分）","Day10: 成約・着手金受領（40,000円）","Day24: 納品・残金受領→80,000〜100,000円確定"],
+ todos:["「米国向け越境EC市場調査」のサンプルレポートをClaudeで作成（品質証明）","Claude + Perplexity APIを組み合わせた英語一次情報収集フローを構築","越境EC支援・貿易関連コミュニティ（JETRO関連・商工会議所）に参加","越境ECを検討中の中小企業経営者のDMリストを50件作成","「進出前の市場調査、2週間・80,000円でやります」という明確な価値提案でDM","ヒアリングシート作成（進出希望国・商品カテゴリ・競合認識・予算感）","調査中は中間報告を1回設けてフィードバックを反映","納品後: 月次動向モニタリング（5万円/月）に継続提案"],dl:"2026-07-14"},
+];
+
+const KEY="atk_v4";
+let S=JSON.parse(localStorage.getItem(KEY)||"{}"),CUR=null,CTAB="strategy";
+const nc=["n1","n2","n3","n4","n5","n6","n7","n8","n9","n10"];
+const stn={notstarted:"未着手",inprogress:"進行中",done:"完了"};
+const stc={notstarted:"t-ns",inprogress:"t-ip",done:"t-dn"};
+const uL={now:"🔥 即着手",mid:"⚡ 中期",build:"🏗 構築型"};
+const uC={now:"u-now",mid:"u-mid",build:"u-build"};
+const bN=["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩"];
+function gs(id){if(!S[id])S[id]={st:"notstarted",td:[],ms:[]};return S[id];}
+function save(){localStorage.setItem(KEY,JSON.stringify(S));}
+function dl(d){return Math.ceil((new Date(d)-Date.now())/86400000);}
+
+function kpi(){
+  let dn=0,tot=0,act=0;
+  BMS.forEach(b=>{const s=gs(b.id);dn+=s.td.length;tot+=b.todos.length;if(s.st==="inprogress")act++;});
+  const p=tot?Math.round(dn/tot*100):0;
+  document.getElementById("h-pct").textContent=p+"% 完了";
+  document.getElementById("h-act").textContent=act+"件 進行中";
+  document.getElementById("h-td").textContent=dn+"/"+tot+" ToDo";
+  document.getElementById("sf-dn").textContent=dn;
+  document.getElementById("sf-tot").textContent=tot;
+  document.getElementById("sf-pct").textContent=p+"%";
+}
+
+function renderSidebar(){
+  const groups=[
+    {label:"🔥 即着手型（TTR 7〜14日）",ids:[1,2,3,4]},
+    {label:"⚡ 中期着手型（TTR 14〜21日）",ids:[5,6,7,9]},
+    {label:"🏗 構築・高単価型",ids:[8,10]}
+  ];
+  let h="";
+  groups.forEach(g=>{
+    h+=`<div class="sg-label">${g.label}</div>`;
+    g.ids.forEach(id=>{
+      const b=BMS.find(x=>x.id===id),s=gs(id);
+      const p=b.todos.length?Math.round(s.td.length/b.todos.length*100):0;
+      h+=`<div class="bm-item${CUR===id?" active":""}" onclick="selBM(${id})">
+        <div class="bm-badge ${nc[id-1]}">${bN[id-1]}</div>
+        <div class="bm-info">
+          <div class="bm-name">${b.title}</div>
+          <div class="bm-row2"><span class="bm-stag tag ${stc[s.st]}">${stn[s.st]}</span><div class="mini-bar"><div class="mini-fill" style="width:${p}%"></div></div></div>
+        </div>
+      </div>`;
+    });
+  });
+  document.getElementById("sb-list").innerHTML=h;
+  kpi();
+}
+
+function selBM(id){
+  CUR=id;CTAB="strategy";
+  document.getElementById("empty").style.display="none";
+  const v=document.getElementById("bm-view");v.style.display="flex";
+  renderBM();renderSidebar();
+}
+
+function renderBM(){
+  if(!CUR)return;
+  const b=BMS.find(x=>x.id===CUR),s=gs(CUR);
+  const p=b.todos.length?Math.round(s.td.length/b.todos.length*100):0;
+  const d=dl(b.dl),dc=d<0?"color:#ef4444":d<14?"color:#f59e0b":"color:#10b981";
+  // Header
+  document.getElementById("bm-hd").innerHTML=`
+    <div class="bm-hd-top">
+      <div class="bm-num-xl ${nc[CUR-1]}">BM${bN[CUR-1]}</div>
+      <div class="bm-title-blk">
+        <div class="bm-main-ttl">${b.title}</div>
+        <div class="bm-tags">
+          <span class="tag ${uC[b.urgency]}">${uL[b.urgency]}</span>
+          <span class="tag t-type">${b.type}</span>
+          <select class="stsel" onchange="chSt(this.value)">
+            <option value="notstarted"${s.st==="notstarted"?" selected":""}>未着手</option>
+            <option value="inprogress"${s.st==="inprogress"?" selected":""}>進行中</option>
+            <option value="done"${s.st==="done"?" selected":""}>完了</option>
+          </select>
+          <span class="dl-txt" style="${dc}">期限: ${b.dl}（${d<0?"超過":d+"日後"}）</span>
+        </div>
+      </div>
+    </div>
+    <div class="bm-prog-row">
+      <span>ToDo ${s.td.length}/${b.todos.length}</span>
+      <div class="bm-prog-bg"><div class="bm-prog-fill" style="width:${p}%"></div></div>
+      <span style="font-weight:700;color:#a78bfa">${p}%</span>
+    </div>`;
+  // Strategy panel
+  document.getElementById("panel-strategy").innerHTML=`
+    <div class="rat-box"><div class="box-lbl">戦略的根拠 — AI Value Arbitrage</div><div class="box-txt">${b.rationale}</div></div>
+    <div class="box-lbl" style="margin-bottom:8px;">ユニットエコノミクス</div>
+    <div class="ue-grid">${b.ue.map(u=>`<div class="ue-card"><div class="ue-lbl">${u.l}</div><div class="ue-val ${u.c}">${u.v}</div></div>`).join("")}</div>`;
+  // Tools panel
+  document.getElementById("panel-tools").innerHTML=`
+    <div class="box-lbl" style="margin-bottom:10px;">使用ツール・技術スタック</div>
+    <div class="tools-grid">${b.tools.map(t=>`<div class="tool-card"><div class="tool-ico">${t.i}</div><div><div class="tool-name">${t.n}</div><div class="tool-use">${t.u}</div></div></div>`).join("")}</div>`;
+  // Milestones panel
+  document.getElementById("panel-milestones").innerHTML=`<ul class="ms-list">${
+    b.ms.map((m,i)=>{
+      const done=s.ms.includes(i),isAc=!done&&i===s.ms.length;
+      const dm=m.match(/^(Day[\d\-]+):\s*/),day=dm?dm[1]:"",txt=dm?m.slice(dm[0].length):m;
+      return`<li class="ms-item${done?" ck":""}" onclick="togMs(${i})">
+        <div class="ms-spine"><div class="ms-dot${done?" dn":isAc?" ac":""}"></div>${i<b.ms.length-1?'<div class="ms-line"></div>':""}</div>
+        <div class="ms-content">${day?`<div class="ms-day">${day}</div>`:""}
+          <div class="ms-txt">${txt}</div></div>
+      </li>`;
+    }).join("")
+  }</ul>`;
+  // ToDo panel
+  document.getElementById("panel-todos").innerHTML=`
+    <div class="td-count">${s.td.length} / ${b.todos.length} 完了</div>
+    <ul class="td-list">${
+      b.todos.map((t,i)=>`<li class="td-item${s.td.includes(i)?" ck":""}" onclick="togTd(${i})"><div class="td-cb"></div><span class="td-txt">${t}</span></li>`).join("")
+    }</ul>`;
+  setTab(CTAB);
+}
+
+function setTab(t){
+  CTAB=t;
+  document.querySelectorAll(".itab").forEach(b=>b.classList.toggle("active",b.dataset.tab===t));
+  document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id==="panel-"+t));
+}
+function chSt(v){gs(CUR).st=v;save();renderBM();renderSidebar();}
+function togMs(i){const s=gs(CUR);s.ms.includes(i)?s.ms=s.ms.filter(x=>x!==i):s.ms.push(i);save();renderBM();}
+function togTd(i){const s=gs(CUR);s.td.includes(i)?s.td=s.td.filter(x=>x!==i):s.td.push(i);save();renderBM();renderSidebar();}
+
+document.addEventListener("DOMContentLoaded",()=>{
+  renderSidebar();
+  document.getElementById("inner-tabs").addEventListener("click",e=>{
+    const t=e.target.closest(".itab");if(t)setTab(t.dataset.tab);
+  });
+});
+</script>
+</body>
+</html>
